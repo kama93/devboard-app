@@ -2,7 +2,7 @@ import TaskCard from './components/TaskCard';
 import TaskForm from './components/TaskForm';
 
 import { useState } from 'react';
-import type { Task } from './type';
+import type { Task, Priority } from './type';
 
 import './App.css'
 
@@ -13,6 +13,7 @@ function App() {
       title: 'Initialize Phase 2 Architecture',
       description: 'Setup the modern Vite environment with the strict TypeScript compiler pass.',
       status: 'doing',
+      priority: 'medium',
       createdAt: Date.now(),
     },
     {
@@ -20,16 +21,18 @@ function App() {
       title: 'Master Component Type Contracts',
       description: 'Bind strict structural data interfaces cleanly onto functional child presentation props.',
       status: 'todo',
+      priority: 'high',
       createdAt: Date.now(),
     }
   ]);
 
-   const handleAddTask = (title: string, description: string) => {
+   const handleAddTask = (title: string, description: string, priority: Priority) => {
     const newTask: Task = {
       id: Date.now(),
       title,
       description,
       status: 'todo',
+      priority,
       createdAt: Date.now()
     };
 

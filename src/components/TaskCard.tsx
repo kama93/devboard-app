@@ -16,9 +16,21 @@ function TaskCard({task, onStatusChange}: TaskCardProps) {
     }
   };
 
+  const getPriorityStyle = () => {
+    switch (task.priority) {
+      case 'high': return { color: '#dc3545', background: '#f8d7da' }; // Red
+      case 'medium': return { color: '#fd7e14', background: '#fff3cd' }; // Orange
+      case 'low': return { color: '#6c757d', background: '#e2e3e5' }; // Grey
+      default: return { color: '#333', background: '#eee' };
+    }
+  };
+
     return (
   <div style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '6px', margin: '10px 0', background: '#fff' }}>
       <h4 style={{ margin: '0 0 10px 0' }}>{task.title}</h4>
+      <span style={{ fontSize: '11px', padding: '2px 6px', borderRadius: '3px', fontWeight: 'bold', ...getPriorityStyle() }}>
+          {task.priority.toUpperCase()}
+        </span>
       <p style={{ margin: '0 0 15px 0', color: '#555', fontSize: '14px' }}>{task.description}</p>
       
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -31,7 +43,7 @@ function TaskCard({task, onStatusChange}: TaskCardProps) {
             background: getBadgeColor(),
             cursor: task.status === 'done' ? 'not-allowed' : 'pointer',
             fontWeight: 'bold',
-            userSelect: 'none'
+            userSelect: 'none',
           }}
         >
           {task.status.toUpperCase()} {task.status !== 'done' && '→'}
